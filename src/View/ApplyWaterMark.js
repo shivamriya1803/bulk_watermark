@@ -42,7 +42,10 @@ const ApplyWatermarkPage = ({ location }) => {
 
 
     const applyWatermarkToImages = ({images,text}) => {
-      const watermarked = images.map((imageUrl) => {
+      
+      const watermarked = []
+      for (let index = 0; index < images.length; index++) {
+        let imageUrl = images[index];
         const image = new Image();
         image.src = imageUrl;
   
@@ -57,16 +60,20 @@ const ApplyWatermarkPage = ({ location }) => {
         context.fillStyle = 'rgba(255, 255, 255, 0.5)';
         context.font = '30px Arial';
         context.textAlign = 'center';
-        context.fillText(text, canvas.width / 2, canvas.height / 2);
-  
+        context.fillText(text, canvas.width * 0.50, canvas.height * 0.55);
+        console.log("Width",canvas.width)
+        console.log("Height",canvas.height)
         // Add watermark at top left corner
-        context.fillText(text, 50,30);
-  
+        const leftTopX = canvas.width * 0.15; // 15% from left
+        const leftTopY = canvas.height * 0.05; // 5% from top
+        context.fillText(text, leftTopX, leftTopY);
+
         // Add watermark at bottom right corner
-        context.fillText(text, canvas.width-80 , canvas.height-10);
-  
-        return canvas.toDataURL();
-      });
+        const rightBottomX = canvas.width * 0.80; // 90% from left
+        const rightBottomY = canvas.height * 0.95; // 90% from top
+        context.fillText(text, rightBottomX, rightBottomY);
+        watermarked.push(canvas.toDataURL())
+      }
   
       setWatermarkedImages(watermarked);
     };
@@ -80,7 +87,7 @@ const ApplyWatermarkPage = ({ location }) => {
         // Extract the base64 data and remove the data prefix
         const base64Data = imageDataUrl.split(';base64,')[1];
         // Add the image to the zip folder
-        zip.file(`image_${index}.jpeg`, base64Data, { base64: true });
+        zip.file(`image_${index+1}.jpeg`, base64Data, { base64: true });
       });
 
       const content = await zip.generateAsync({ type: 'blob' });
@@ -92,13 +99,14 @@ const ApplyWatermarkPage = ({ location }) => {
   };
 
   return (
-    <div>
-      <h2>Watermark Applied to Images:</h2>
-      <ul>
+    <div style={{marginTop:"70%"}}>
+      <h2 style={{color: '#ffffff',fontWeight: '400', fontSize:"45px"}}>Watermark Images:</h2>
+      <ol>
         {watermarkedImages.map((image, index) => (
-          <li key={index}>{image}</li>
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
+          <li key={index}><a style={{textDecoration:"none",fontSize: "24px",color: 'white',fontWeight: "500"}} href={image}> image_{index+1} </a> </li>
         ))}
-      </ul>
+      </ol>
       <button onClick={downloadImages}>Download Watermarked Images</button>
     </div>
   );

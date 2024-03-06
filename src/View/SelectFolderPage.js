@@ -35,7 +35,8 @@ const SelectFolderPage = () => {
   };
   
   return (
-    <div>
+    <div style={{marginTop:"70%"}}>
+      <h1 style={{color: '#ffffff',fontWeight: '400', fontSize:"45px"}}>Water Images</h1>
       <input type="text" placeholder='Text for WaterMark' id="waterMarkText" onChange={(event)=>{setFileText(event.target.value)}}></input>
       <input type="file" style={{ display: 'none' }} ref={fileInputRef} onChange={handleFilesSelected} multiple />
       <button onClick={selectFolder}>Select Images</button>

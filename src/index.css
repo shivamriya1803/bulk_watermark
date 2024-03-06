@@ -5,9 +5,111 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('../public/Cristiano-Ronaldo-Wallpaper-10.jpg');
+  background-position: bottom;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+h1 {
+  text-align: center
+}
+
+input {
+  padding: 15px;
+  width: 85%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+  border-radius: 10px;
+}
+
+
+
+.tab input:focus{
+
+border:1px solid #6a1b9a !important;
+outline: none;
+}
+
+input.invalid {
+  border:1px solid #e03a0666;
+}
+
+.tab {
+  display: none
+}
+
+button {
+  margin-top: 20px;
+  background-color: #6A1B9A;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-family: sans-serif;
+  cursor: pointer;
+  width:92%;
+  font-size: larger;
+}
+
+button:hover {
+  opacity: 0.8
+}
+
+button:focus{
+
+outline: none !important;
+}
+
+#prevBtn {
+  background-color: #bbbbbb
+}
+
+
+.all-steps{
+    text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+ol {
+  line-height: 2;
+  display: ruby-text;
+  width: 100%;
+  padding: 0px;
+}
+
+ol li {
+  list-style-type: none;
+  counter-increment: item;
+  display: flow;
+}
+
+ol li:before {
+  content: counter(item);
+  display: inline-block;
+  width: 12px;
+  height: 20px;
+  font-family: "Indie Flower", cursive;
+  margin-right: 5px;
+  background-color: #5c38acba;
+  color: #eca2ed;
+  font-weight: bold;
+  font-size: 140%;
+  padding: 0 8px 8px;
+  border-radius: 3px;
+  line-height: 1.3;
 }
