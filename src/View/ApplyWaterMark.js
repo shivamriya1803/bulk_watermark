@@ -64,6 +64,7 @@ const ApplyWatermarkPage = ({ location }) => {
         console.log("Width",canvas.width)
         console.log("Height",canvas.height)
         // eslint-disable-next-line eqeqeq
+        if(canvas.width==0 || canvas.height==0){
           continue
         }
         // Add watermark at top left corner
