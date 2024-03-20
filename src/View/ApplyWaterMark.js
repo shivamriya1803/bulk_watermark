@@ -63,6 +63,9 @@ const ApplyWatermarkPage = ({ location }) => {
         context.fillText(text, canvas.width * 0.50, canvas.height * 0.55);
         console.log("Width",canvas.width)
         console.log("Height",canvas.height)
+        // eslint-disable-next-line eqeqeq
+          continue
+        }
         // Add watermark at top left corner
         const leftTopX = canvas.width * 0.15; // 15% from left
         const leftTopY = canvas.height * 0.05; // 5% from top
@@ -83,12 +86,16 @@ const ApplyWatermarkPage = ({ location }) => {
     try {
       const zip = new JSZip();
       console.log("WaterMArked",watermarkedImages)
-      watermarkedImages.forEach((imageDataUrl, index) => {
-        // Extract the base64 data and remove the data prefix
-        const base64Data = imageDataUrl.split(';base64,')[1];
+      for (let index = 0; index < watermarkedImages.length; index++) {
+        const element = watermarkedImages[index];
+        const base64Data = element.split(';base64,')[1];
         // Add the image to the zip folder
         zip.file(`image_${index+1}.jpeg`, base64Data, { base64: true });
-      });
+      }
+      // watermarkedImages.forEach((imageDataUrl, index) => {
+      //   // Extract the base64 data and remove the data prefix
+        
+      // });
 
       const content = await zip.generateAsync({ type: 'blob' });
 
