@@ -10,8 +10,10 @@ const ApplyWatermarkPage = ({ location }) => {
   useEffect(() => {
     const { state } = location;
     if (state && state.images && state.filetext) {
-      setFolder(state.images);
-      applyWatermarkToImages({images:state.images,text:state.filetext});
+      setTimeout(()=>{
+        setFolder(state.images);
+        applyWatermarkToImages({images:state.images,text:state.filetext});
+      },1000)
     }
   }, [location]);
 
@@ -57,7 +59,7 @@ const ApplyWatermarkPage = ({ location }) => {
         context.drawImage(image, 0, 0);
   
         // Add watermark at center
-        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        context.fillStyle = '#011218';
         context.font = '30px Arial';
         context.textAlign = 'center';
         context.fillText(text, canvas.width * 0.50, canvas.height * 0.55);
@@ -68,7 +70,7 @@ const ApplyWatermarkPage = ({ location }) => {
           continue
         }
         // Add watermark at top left corner
-        const leftTopX = canvas.width * 0.15; // 15% from left
+        const leftTopX = canvas.width * 0.20; // 15% from left
         const leftTopY = canvas.height * 0.05; // 5% from top
         context.fillText(text, leftTopX, leftTopY);
 
